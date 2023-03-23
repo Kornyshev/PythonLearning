@@ -1,0 +1,8 @@
+name=kek
+last_name=top
+power=9001
+song=shadilay
+new_value=654654
+server=46456487987
+browser=chrome
+float=3.14
