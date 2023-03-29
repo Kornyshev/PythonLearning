@@ -32,8 +32,7 @@ def merge_elems(*elems):
             if isinstance(elem, str) and len(elem) == 1:
                 yield elem
             else:
-                for item in merge_elems(*elem):
-                    yield item
+                yield from merge_elems(*elem)
 
 
 def map_like(fun, *elems):
@@ -41,7 +40,7 @@ def map_like(fun, *elems):
         try:
             yield fun(item)
         except (TypeError, IndexError) as e:
-            yield f"{item}: '{type(item).__name__}' object {str(e).lower()}"
+            yield f"{item}: {e}"
 
 
 if __name__ == '__main__':
