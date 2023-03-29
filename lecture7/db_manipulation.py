@@ -18,27 +18,11 @@ from typing import Iterable
 from sqlalchemy import *
 from sqlalchemy.orm import *
 
-Base = declarative_base()
-engine = create_engine('sqlite:///films_db.db')
-
-
-class Film(Base):
-    __tablename__ = 'films'
-
-    id = Column(Integer, primary_key=True)
-    title = Column(String(255))
-    director = Column(String(255))
-    release_year = Column(Integer)
-
-    def __str__(self):
-        return f"Title: {self.title}, director: {self.director}, release year: {self.release_year}"
-
-
-Base.metadata.create_all(engine)
+from create_db import Film
 
 
 def print_all_films():
-    session_maker = sessionmaker(bind=engine)
+    session_maker = sessionmaker(bind=create_engine('sqlite:///films_db.db'))
     session = session_maker()
     all_films = session.query(Film).all()
     if len(all_films) == 0:
@@ -50,22 +34,22 @@ def print_all_films():
 
 
 def clear_films_table():
-    session_maker = sessionmaker(bind=engine)
+    session_maker = sessionmaker(bind=create_engine('sqlite:///films_db.db'))
     session = session_maker()
     session.query(Film).delete()
     session.commit()
 
 
 def add_films_to_db(films: Iterable[Film]):
-    session_maker = sessionmaker(bind=engine)
+    session_maker = sessionmaker(bind=create_engine('sqlite:///films_db.db'))
     session = session_maker()
     for film in films:
         session.add(film)
     session.commit()
 
 
-def update_film_year_by_title(title, year):
-    session_maker = sessionmaker(bind=engine)
+def update_film_year_by_title(title: str, year: int):
+    session_maker = sessionmaker(bind=create_engine('sqlite:///films_db.db'))
     session = session_maker()
     session.query(Film).filter(Film.title == title).update({'release_year': year})
     session.commit()
