@@ -3,12 +3,12 @@ from lecture14.pageobjects.page_objects import *
 
 def test_simple_log_in(user, driver):
     driver.get(MainPage.url)
-    mav_bar = NavigationBar(driver)
-    mav_bar.click_log_in_link()
+    nav_bar = NavigationBar(driver)
+    nav_bar.click_log_in_link()
     LogInForm(driver).log_in_as_user(user)
     # expected result: Log out button is presented;  Welcome {username} message is presented
-    assert mav_bar.get_welcome_label_text() == f'Welcome {user.username}'
-    assert mav_bar.is_log_out_link_displayed()
+    assert nav_bar.get_welcome_label_text() == f'Welcome {user.username}'
+    assert nav_bar.is_log_out_link_displayed()
 
 
 def test_add_highest_price_product_to_cart(user, driver, login_precondition):
