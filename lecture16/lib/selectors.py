@@ -13,7 +13,8 @@ class MainPageSelectors:
     PRODUCTS_PRICES = (By.CSS_SELECTOR, 'div#tbodyid div.card-block > h5')
     PRODUCTS_TITLES = (By.CSS_SELECTOR, 'div#tbodyid div.card-block > h4')
     PRODUCTS_TITLE_RELATIVE_TO_PRICE = (By.XPATH, './/../h4')
-    MONITORS_CATEGORY = (By.XPATH, '//div[@class=\'list-group\']//a[@class=\'list-group-item\' and text()=\'Monitors\']')
+    MONITORS_CATEGORY = (
+        By.XPATH, '//div[@class=\'list-group\']//a[@class=\'list-group-item\' and text()=\'Monitors\']')
 
 
 class LogInFormSelectors:

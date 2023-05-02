@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from lecture16.models.product import Product
 from lecture16.models.user import User
-from lecture16.pageobjects.selectors import *
+from selectors import *
 
 
 class MainPage:

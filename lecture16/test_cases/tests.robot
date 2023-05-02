@@ -1,5 +1,5 @@
 *** Settings ***
-Library    ../lib/custom_library.py
+Library    CustomLibrary.py
 
 *** Variables ***
 ${username}  pytest_user
