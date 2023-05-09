@@ -30,6 +30,7 @@ class MainPage:
             EC.visibility_of_element_located(MainPageSelectors.MONITORS_CATEGORY)).click()
 
     def get_product_with_highest_price(self) -> Product:
+        # Necessary waiting, because there is nothing on the page to bind to when switching between categories
         time.sleep(3)
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(MainPageSelectors.PRODUCTS_PRICES))
@@ -86,10 +87,10 @@ class CartPage:
         self.driver = driver
 
     def get_all_products(self) -> List[Product]:
-        WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(CartPageSelectors.PRODUCTS))
-        return [Product(elem.find_element(By.XPATH, './td[2]').text, '$' + elem.find_element(By.XPATH, './td[3]').text)
-                for elem in self.driver.find_elements(*CartPageSelectors.PRODUCTS)]
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CartPageSelectors.PRODUCTS))
+        for elem in self.driver.find_elements(*CartPageSelectors.PRODUCTS):
+            yield Product(elem.find_element(By.XPATH, './td[2]').text,
+                          '$' + elem.find_element(By.XPATH, './td[3]').text)
 
 
 class NavigationBar:
