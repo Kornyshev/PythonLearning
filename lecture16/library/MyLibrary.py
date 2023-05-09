@@ -1,3 +1,4 @@
+from robot.api.deco import keyword
 from selenium import webdriver
 
 from pageobjects.page_objects import *
@@ -56,6 +57,7 @@ class MyLibrary:
         product_page.click_add_to_cart()
         product_page.close_alert()
 
+    @keyword(tags=['screenshot'])
     def assert_that_product_with_title_and_price_displayed_in_the_cart(self, title: str, price: str):
         assert any(product == Product(title, price)
                    for product in CartPage(self.driver).get_all_products()), \

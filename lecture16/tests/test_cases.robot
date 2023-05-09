@@ -1,4 +1,5 @@
 # robot --outputdir .\lecture16\results .\lecture16\tests\test_cases.robot
+# robot --pythonpath C:\Projects\PythonLearning\lecture16\library --listener ScreenshotListener --outputdir .\lecture16\results .\lecture16\tests\test_cases.robot
 
 *** Settings ***
 Library    C:/Projects/PythonLearning/lecture16/library/MyLibrary.py
