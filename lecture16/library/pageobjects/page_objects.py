@@ -1,14 +1,13 @@
 import time
 from typing import List
 
+from custom_selectors.my_selectors import *
+from models.product import Product
+from models.user import User
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-from lecture16.models.product import Product
-from lecture16.models.user import User
-from selectors import *
 
 
 class MainPage:
@@ -30,6 +29,7 @@ class MainPage:
             EC.visibility_of_element_located(MainPageSelectors.MONITORS_CATEGORY)).click()
 
     def get_product_with_highest_price(self) -> Product:
+        # Necessary waiting, because there is nothing on the page to bind to when switching between categories
         time.sleep(3)
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(MainPageSelectors.PRODUCTS_PRICES))
