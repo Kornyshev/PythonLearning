@@ -1,7 +1,7 @@
 from lecture14.pageobjects.page_objects import *
 
 
-def test_simple_log_in(user, driver):
+def test_simple_log_in(user, driver, logout):
     driver.get(MainPage.url)
     nav_bar = NavigationBar(driver)
     nav_bar.click_log_in_link()
@@ -13,7 +13,7 @@ def test_simple_log_in(user, driver):
         "User can't see Log Out link on the Navigation Bar"
 
 
-def test_add_highest_price_product_to_cart(driver):
+def test_add_highest_price_product_to_cart(driver, login, logout):
     main_page = MainPage(driver)
     main_page.click_monitors_category()
     test_product = main_page.get_product_with_highest_price()

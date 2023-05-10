@@ -101,6 +101,12 @@ class NavigationBar:
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(NavigationSelectors.LOG_IN_LINK)).click()
 
+    def click_log_out_link(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(NavigationSelectors.LOG_OUT_LINK)).click()
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(NavigationSelectors.LOG_IN_LINK))
+
     def click_cart_link(self):
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(NavigationSelectors.CART_LINK)).click()
