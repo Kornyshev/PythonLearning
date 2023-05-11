@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation     Resource file with custom keywords
-Library           C:/Projects/PythonLearning/lecture16/library/MyLibrary.py
+Library           ../library/MyLibrary.py
 
 *** Keywords ***
 Log In as registered user

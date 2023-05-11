@@ -15,6 +15,9 @@ class MyLibrary:
     def click_log_in_link_on_navigation_bar(self):
         NavigationBar(self.driver).click_log_in_link()
 
+    def click_log_out_link_on_navigation_bar(self):
+        NavigationBar(self.driver).click_log_out_link()
+
     def click_cart_link_on_navigation_bar(self):
         NavigationBar(self.driver).click_cart_link()
 
@@ -51,6 +54,9 @@ class MyLibrary:
     def assert_that_user_sees_product_price_on_the_page(self, price: str):
         assert price in ProductPage(self.driver).get_product_price(), \
             f"User can't see product with price {price} on the Product page"
+
+    def wait_for_exact_amount_of_products_on_the_page(self, amount: int):
+        MainPage(self.driver).wait_for_exact_amount_of_elements(amount)
 
     def user_clicks_add_to_cart_button_and_close_alert_on_product_page(self):
         product_page = ProductPage(self.driver)

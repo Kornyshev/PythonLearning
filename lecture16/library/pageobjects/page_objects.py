@@ -1,4 +1,3 @@
-import time
 from typing import List
 
 from custom_selectors.my_selectors import *
@@ -30,12 +29,18 @@ class MainPage:
 
     def get_product_with_highest_price(self) -> Product:
         # Necessary waiting, because there is nothing on the page to bind to when switching between categories
-        time.sleep(3)
+        # time.sleep(3)
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(MainPageSelectors.PRODUCTS_PRICES))
         elements = self.driver.find_elements(*MainPageSelectors.PRODUCTS_PRICES)
         element = max(elements, key=lambda x: int(x.text.strip('$')))
         return Product(element.find_element(*MainPageSelectors.PRODUCTS_TITLE_RELATIVE_TO_PRICE).text, element.text)
+
+    def wait_for_exact_amount_of_elements(self, amount: int):
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: len(driver.find_elements(*MainPageSelectors.PRODUCTS_PRICES)) == amount,
+            f"Expected {amount} price elements, "
+            f"but found {len(self.driver.find_elements(*MainPageSelectors.PRODUCTS_PRICES))}")
 
 
 class LogInForm:
@@ -99,6 +104,12 @@ class NavigationBar:
     def click_log_in_link(self):
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(NavigationSelectors.LOG_IN_LINK)).click()
+
+    def click_log_out_link(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(NavigationSelectors.LOG_OUT_LINK)).click()
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(NavigationSelectors.LOG_IN_LINK))
 
     def click_cart_link(self):
         WebDriverWait(self.driver, 10).until(
